@@ -1,15 +1,16 @@
 package com.example.kwwqxmokvrqzdaaspscp.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 @Data
+@Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+@Table(name = "person")
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private int birthYear;

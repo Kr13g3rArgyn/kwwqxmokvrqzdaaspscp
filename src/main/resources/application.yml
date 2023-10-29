@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  liquibase:
+    enabled: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:2023/postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
