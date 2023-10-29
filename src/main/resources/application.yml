@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   liquibase:
-    enabled: false
+    enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
@@ -10,4 +10,7 @@ spring:
     url: jdbc:postgresql://localhost:2023/postgres
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
