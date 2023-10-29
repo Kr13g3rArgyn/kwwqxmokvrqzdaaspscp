@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-person
+      author: Elnaz
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: string
+              - column:
+                  name: birthYear
+                  type: int
+              - column:
+                  name: firstPhoneNum
+                  type: long
+              - column:
+                  name: secondPhoneNum
+                  type: long
+              - column:
+                  name: createdAt
+                  type: datetime
