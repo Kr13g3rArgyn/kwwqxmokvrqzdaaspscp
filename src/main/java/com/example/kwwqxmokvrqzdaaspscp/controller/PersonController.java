@@ -1,10 +1,10 @@
 package com.example.kwwqxmokvrqzdaaspscp.controller;
+import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
 import com.example.kwwqxmokvrqzdaaspscp.dto.PersonDTO;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Person;
 import com.example.kwwqxmokvrqzdaaspscp.service.PersonService;
 import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotCreatedException;
 import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,17 +17,18 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/person")
 public class PersonController {
-    private final ModelMapper mapper;
+
     private final PersonService personService;
 
-        public PersonController(PersonService personService, ModelMapper mapper) {
+    private final PersonMapper mapper;
+        public PersonController(PersonService personService, PersonMapper mapper) {
         this.personService = personService;
         this.mapper = mapper;
     }
 
     @GetMapping
     private List<PersonDTO> getAll(){
-        return personService.getAll().stream().map(this::convertToPeopleDTO).collect(Collectors.toList());
+        return personService.getAll().stream().map(mapper::convertToPersonDTO).collect(Collectors.toList());
     }
     @GetMapping("/{id}")
     private Person getOneDude(int id){
@@ -35,7 +36,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private void deletePerson(int id){
+    private void deletePerson(@PathVariable("id") int id){
         personService.deletePerson(id);
     }
 
@@ -51,19 +52,17 @@ public class PersonController {
             }
             throw new PersonNotCreatedException(msg.toString());
         }
-        personService.create(convertToPerson(personDTO));
+        personService.create(mapper.convertToPerson(personDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
-    private Person updatePerson(@PathVariable int id, @RequestBody Person person){
-               return personService.updatePeople(id, person);
+    private PersonDTO updatePerson(@PathVariable int id, @RequestBody PersonDTO personDTO){
+               return personService.updatePeople(id, personDTO);
     }
 
-
-    private Person convertToPerson(PersonDTO peopleDTO) {
-        return mapper.map(peopleDTO, Person.class);
-    }
-    private PersonDTO convertToPeopleDTO(Person people){
-        return mapper.map(people, PersonDTO.class);
-    }
+//    DELAEM FILTER YEEEE
+    @GetMapping("/filter/{limit}/{offset}")
+    private List<PersonDTO> getPeopleThroughFilter(@PathVariable int limit, int offset){
+            return personService.getPeopleThroughLimitAndOffset(limit,offset).stream().map(mapper::convertToPersonDTO).collect(Collectors.toList());
+        }
 }
