@@ -17,7 +17,6 @@ public class Person {
     private Integer id;
     @Size(min = 0,max = 30,message = "min - 0, max - 30 characters")
     private String name;
-    @Min(1900)
     @Max(2020)
     private int birthYear;
     private long firstPhoneNum;

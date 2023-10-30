@@ -1,8 +1,10 @@
 package com.example.kwwqxmokvrqzdaaspscp.service;
 
+import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
+import com.example.kwwqxmokvrqzdaaspscp.dto.PersonDTO;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Person;
 import com.example.kwwqxmokvrqzdaaspscp.repository.PersonRepository;
-import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotFoundException;
+import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotCreatedException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,13 +12,16 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
     private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
     @Autowired
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, PersonMapper personMapper) {
         this.personRepository = personRepository;
+        this.personMapper = personMapper;
     }
 
     public List<Person> getAll(){
@@ -35,20 +40,27 @@ public class PersonService {
     public void deletePerson(int id){
         personRepository.deleteById(id);
     }
-    public Person updatePeople(int id, Person updatedPerson) {
+    public PersonDTO updatePeople(int id, PersonDTO updatedPerson) {
         Optional<Person> existingPerson = personRepository.findById(id);
         if (existingPerson.isPresent()) {
             Person personToUpdate = existingPerson.get();
             personToUpdate.setName(updatedPerson.getName());
-            personToUpdate.setBirthYear(updatedPerson.getBirthYear());
             personToUpdate.setFirstPhoneNum(updatedPerson.getFirstPhoneNum());
             personToUpdate.setSecondPhoneNum(updatedPerson.getSecondPhoneNum());
-            return personRepository.save(personToUpdate);
+            personRepository.save(personToUpdate);
+            return personMapper.convertToPersonDTO(personToUpdate);
         } else {
-            return null;
+            throw new PersonNotCreatedException("Person with id " + id + " not found");
         }
     }
-    private void  enrichPerson(Person person){
+
+    //Filter
+    public List<Person> getPeopleThroughLimitAndOffset(int limit, int offset){
+        return personRepository.findAllWithLimitAndOffset(limit,offset).stream().collect(Collectors.toList());
+    }
+
+
+    private void  enrichPerson(Person person){ //Setting local date time when its created
         person.setCreatedAt(LocalDateTime.now());
     }
 }

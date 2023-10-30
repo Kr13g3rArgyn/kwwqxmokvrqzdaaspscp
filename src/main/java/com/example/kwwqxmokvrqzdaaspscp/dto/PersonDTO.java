@@ -23,7 +23,6 @@ public class PersonDTO {
     @Size(min = 3, max = 40, message = "Name should be between 3 and 40 characters")
     @Column(name = "name", nullable = false)
     private String name;
-
     private long firstPhoneNum;
 
     private long secondPhoneNum;
