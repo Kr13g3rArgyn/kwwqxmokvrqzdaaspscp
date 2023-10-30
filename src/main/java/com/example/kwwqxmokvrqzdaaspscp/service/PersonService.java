@@ -32,7 +32,7 @@ public class PersonService {
         enrichPerson(person);
         return personRepository.save(person);
     }
-    private void deletePerson(int id){
+    public void deletePerson(int id){
         personRepository.deleteById(id);
     }
     public Person updatePeople(int id, Person updatedPerson) {
