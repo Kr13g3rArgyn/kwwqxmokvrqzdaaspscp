@@ -2,19 +2,14 @@ package com.example.kwwqxmokvrqzdaaspscp.service;
 
 import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
 import com.example.kwwqxmokvrqzdaaspscp.dto.PersonDTO;
-import com.example.kwwqxmokvrqzdaaspscp.entity.Filter;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Person;
 import com.example.kwwqxmokvrqzdaaspscp.repository.PersonRepository;
 import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotCreatedException;
+import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,8 +29,9 @@ public class PersonService {
     }
 
     public Person findOne(int id){
+        String msg = "";
         Optional<Person> foundPerson = personRepository.findById(id);
-        return foundPerson.orElseThrow();
+        return foundPerson.orElseThrow(null);
     }
     @Transactional
     public Person create(Person person){
