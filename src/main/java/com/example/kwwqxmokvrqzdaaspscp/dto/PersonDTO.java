@@ -24,7 +24,6 @@ public class PersonDTO {
     @Column(name = "name", nullable = false)
     private String name;
     private long firstPhoneNum;
-
     private long secondPhoneNum;
 
 

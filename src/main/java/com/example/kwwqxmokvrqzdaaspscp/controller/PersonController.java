@@ -1,6 +1,7 @@
 package com.example.kwwqxmokvrqzdaaspscp.controller;
 import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
 import com.example.kwwqxmokvrqzdaaspscp.dto.PersonDTO;
+import com.example.kwwqxmokvrqzdaaspscp.entity.Filter;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Person;
 import com.example.kwwqxmokvrqzdaaspscp.service.PersonService;
 import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotCreatedException;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,14 +57,22 @@ public class PersonController {
         personService.create(mapper.convertToPerson(personDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
     @PutMapping("/update/{id}")
     private PersonDTO updatePerson(@PathVariable int id, @RequestBody PersonDTO personDTO){
                return personService.updatePeople(id, personDTO);
     }
 
+
+
 //    DELAEM FILTER YEEEE
+
+
+
+
     @GetMapping("/filter/{limit}/{offset}")
     private List<PersonDTO> getPeopleThroughFilter(@PathVariable int limit, int offset){
             return personService.getPeopleThroughLimitAndOffset(limit,offset).stream().map(mapper::convertToPersonDTO).collect(Collectors.toList());
         }
+
 }
