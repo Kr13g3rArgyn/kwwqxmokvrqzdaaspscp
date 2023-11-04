@@ -14,8 +14,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonDTO {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

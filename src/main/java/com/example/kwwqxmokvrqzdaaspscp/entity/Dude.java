@@ -1,12 +1,8 @@
 package com.example.kwwqxmokvrqzdaaspscp.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
