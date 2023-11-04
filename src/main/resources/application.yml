@@ -7,22 +7,20 @@ spring:
       port: 27017
       authentication-database: admin
       database: myDatabase
-      username: rootuser
-      password: rootpass
       gridfs:
-        database: mongodb
+        database: greetgo
   liquibase:
     enabled: true
 
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: password
-    url: jdbc:postgresql://localhost:5432/postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:2023/postgres
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
   h2:
     console:
