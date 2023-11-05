@@ -4,6 +4,7 @@ import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
 import com.example.kwwqxmokvrqzdaaspscp.dto.DudeDTO;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Dude;
 import com.example.kwwqxmokvrqzdaaspscp.repository.DudeRepository;
+import com.example.kwwqxmokvrqzdaaspscp.util.PersonException.PersonNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class DudeService {
     public Optional<Dude> getDude(int id){
         return dudeRepository.findById(id);
     }
-    public DudeDTO updateDude(int id, Dude updatedDude){
+    public DudeDTO updateDude(int id, DudeDTO updatedDude){
         Optional<Dude> existingDude = dudeRepository.findById(id);
         if (existingDude.isPresent()) {
             Dude dudeToUpdate = existingDude.get();
@@ -36,7 +37,7 @@ public class DudeService {
             return personMapper.convertToDudeDTO(dudeToUpdate);
         }
         else {
-            throw new RuntimeException("Dude with this " + id + "didn't found!");
+            throw new PersonNotFoundException(id);
         }
     }
     @Transactional

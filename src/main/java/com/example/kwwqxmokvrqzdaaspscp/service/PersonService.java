@@ -4,8 +4,8 @@ import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
 import com.example.kwwqxmokvrqzdaaspscp.dto.PersonDTO;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Person;
 import com.example.kwwqxmokvrqzdaaspscp.repository.PersonRepository;
-import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotCreatedException;
-import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotFoundException;
+import com.example.kwwqxmokvrqzdaaspscp.util.PersonException.PersonNotCreatedException;
+import com.example.kwwqxmokvrqzdaaspscp.util.PersonException.PersonNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,10 +28,10 @@ public class PersonService {
     }
 
     public Person findOne(int id){
-        String msg = "";
         Optional<Person> foundPerson = personRepository.findById(id);
-        return foundPerson.orElseThrow(null);
+        return foundPerson.orElseThrow(() -> new PersonNotFoundException(id));
     }
+
     @Transactional
     public Person create(Person person){
         enrichPerson(person);
