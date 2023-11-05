@@ -1,4 +1,4 @@
-package com.example.kwwqxmokvrqzdaaspscp.util;
+package com.example.kwwqxmokvrqzdaaspscp.util.PersonException;
 
 public class PersonErrorResponse {
     private String message;

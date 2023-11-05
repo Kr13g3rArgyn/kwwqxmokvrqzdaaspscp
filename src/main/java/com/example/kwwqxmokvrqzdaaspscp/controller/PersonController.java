@@ -1,10 +1,9 @@
 package com.example.kwwqxmokvrqzdaaspscp.controller;
 import com.example.kwwqxmokvrqzdaaspscp.component.PersonMapper;
 import com.example.kwwqxmokvrqzdaaspscp.dto.PersonDTO;
-import com.example.kwwqxmokvrqzdaaspscp.entity.Filter;
 import com.example.kwwqxmokvrqzdaaspscp.entity.Person;
 import com.example.kwwqxmokvrqzdaaspscp.service.PersonService;
-import com.example.kwwqxmokvrqzdaaspscp.util.PersonNotCreatedException;
+import com.example.kwwqxmokvrqzdaaspscp.util.PersonException.PersonNotCreatedException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
