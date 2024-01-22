@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dude")
@@ -27,11 +28,11 @@ public class DudeController {
         this.dudeService = dudeService;
     }
     @GetMapping
-    private List<Dude> getAll(){
-        return dudeService.getAll();
+    private List<DudeDTO> getAll(){
+        return dudeService.getAll().stream().map(mapper::convertToDudeDTO).collect(Collectors.toList());
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     private Optional<Dude> getOneDude(@PathVariable int id){
         return dudeService.getDude(id);
     }

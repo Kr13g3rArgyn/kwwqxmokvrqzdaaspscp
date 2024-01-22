@@ -23,6 +23,7 @@ public class PersonDTO {
     private String name;
     private long firstPhoneNum;
     private long secondPhoneNum;
-
+    @Column(name = "birth_year")
+    private int birth_year;
 
 }

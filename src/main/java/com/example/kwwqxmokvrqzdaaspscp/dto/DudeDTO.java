@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class DudeDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +23,7 @@ public class DudeDTO {
     private String name;
     private long firstPhoneNum;
     private long secondPhoneNum;
+    @Column(name = "birth_year")
+    private int birth_year;
 
 }

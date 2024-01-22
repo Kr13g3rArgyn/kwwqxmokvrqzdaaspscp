@@ -1,0 +1,4 @@
+-- INSERT INTO person (name, first_phone_num, secondPhoneNum, birth_year, created_at)
+-- VALUES ('John Doe', 1234567890, 9876543210, 1980, '2023-11-06'),
+-- ('Joe Mama', 1234567891, 9876543211, 1981, '2023-11-06'),
+-- ('Joe Mama', 1234327891, 9823543211, 1979, '2023-12-06');

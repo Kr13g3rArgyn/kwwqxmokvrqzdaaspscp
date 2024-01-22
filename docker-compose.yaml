@@ -4,7 +4,18 @@ services:
 
   mongo:
     image: mongo
+    container_name: kwwqxmokvrqzdaaspscp_mongo_1
+    restart: always
+    ports:
+      - "27018:27017"
+
+  postgres:
+    image: postgres
+    container_name: postgres-11
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: local
+    ports:
+      - "2023:5432"

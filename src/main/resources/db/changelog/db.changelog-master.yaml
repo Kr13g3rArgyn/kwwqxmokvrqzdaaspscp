@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/create-person-table.yaml
+      file: db/changelog/changeset/db-changelog-create-person-table.sql
+#  - include:
+#      file: db/changelog/changeset/db-changelog-insert-person-table.sql
